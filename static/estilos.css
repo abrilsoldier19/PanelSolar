@@ -1,0 +1,28 @@
+.futuristic-bg {
+    background-color: #111; /* Color de fondo oscuro */
+}
+
+.futuristic-text {
+    color: #fff; /* Color de texto blanco */
+    font-family: 'Century Gothic', sans-serif;
+}
+
+.futuristic-btn {
+    background-color: #0f9d58; /* Color de fondo verde vibrante */
+    border: none;
+    color: #fff; /* Color de texto blanco */
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.futuristic-btn:hover {
+    background-color: #0c7d3d; /* Color de fondo verde más oscuro al pasar el mouse */
+}
+
+.futuristic-img {
+    display: none; /* Oculta la imagen por defecto */
+    max-width: 100%;
+    height: auto;
+}
