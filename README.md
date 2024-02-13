@@ -114,7 +114,7 @@ body { background: #000; }
 <body class="body">
      <ul style="list-style-type: none; padding: 0;">
       <li style="display: inline-block; margin-right: 10px;">
-        <a href="index.html" class="button">Inicio</a>
+        <a style="font-family: Century Gothic, sans-serif;" type="button" href="index.html" class="btn futuristic-btn">Inicio</a>
       </li>
     </ul>
     <h1 class="futuristic-title">Animación de Irradiación Solar a lo largo del Día</h1>
