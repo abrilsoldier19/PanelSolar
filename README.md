@@ -112,6 +112,11 @@ body { background: #000; }
     </style>
 </head>
 <body class="body">
+     <ul style="list-style-type: none; padding: 0;">
+      <li style="display: inline-block; margin-right: 10px;">
+        <a href="index.html" class="button">Inicio</a>
+      </li>
+    </ul>
     <h1 class="futuristic-title">Animación de Irradiación Solar a lo largo del Día</h1>
     <div class="orb"></div>
     <div class="futuristic-text" style="margin-top: 60px;">
