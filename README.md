@@ -1,1 +1,150 @@
 # PanelSolar
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+    <link href="/static/estilos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/compiled-4.20.0.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Animación de Irradiación Solar</title>
+    <style>
+        .futuristic-btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            background-color: #ffc402;
+            color: rgb(0, 0, 0);
+            cursor: pointer;
+            outline: none;
+            margin-top: 10px;
+            margin-right: 10px;
+            font-weight: bold;
+            font-family: "Century Gothic", Arial, sans-serif;
+            box-shadow: 0 0 10px rgb(238, 211, 112);
+        }
+
+        .futuristic-btn:hover {
+            background-color: #df2a12;
+            color: white;
+            font-family: "Century Gothic", Arial, sans-serif;
+            transform: scale(1.05); 
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 0 10px rgb(238, 158, 112);
+        }
+
+        #solarAnimationContainer {
+            width: 80%; /* Adjust the width as needed */
+            margin: 0 auto; /* Center the container */
+            overflow: hidden; /* Hide the overflowing content */
+            box-shadow: 0 0 18px rgb(238, 211, 112);
+            display: flex;
+            margin-top: 30px;
+            flex-direction: column;
+            align-items: center; /* Centrar verticalmente */
+            justify-content: center;
+        }
+
+        #solarAnimation {
+            width: 100%; /* Ensure the animation fills the container */
+        }
+
+        .futuristic-bg {
+    background-color: #111; /* Color de fondo oscuro */
+}
+
+.futuristic-title {
+    color: #fff; /* Color de texto blanco */
+    font-family: 'Century Gothic', sans-serif;
+    margin-top: 50px;
+}
+
+.futuristic-text {
+    color: #fff; /* Color de texto blanco */
+    font-family: 'Century Gothic', sans-serif;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    /*background-color: rgba(255, 251, 6, 0.201); */
+    padding: 8px; 
+    border-radius: 10px; 
+    width: 650px; 
+    margin: 0 auto;
+    box-shadow: 0 0 18px rgb(238, 158, 112);
+}
+
+
+
+body { background: #000; }
+
+.orb {
+    animation: spin 4s linear infinite;
+    width: 300px;
+    height: 300px;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 50%;
+    box-shadow:
+        inset 0 0 50px #e67300,
+        inset 20px 0 60px rgb(223, 213, 9), /* Cambiar a amarillo */
+        inset -20px 0 60px #FF5733, /* Cambiar a un tono de naranja */
+        inset 20px 0 300px rgb(249, 46, 0), /* Cambiar a rojo */
+        inset -20px 0 300px #FF5733, /* Cambiar a un tono de naranja */
+          0 0 50px #FFFF00, /* Cambiar a amarillo */
+          -10px 0 60px #FF5733, /* Cambiar a un tono de naranja */
+          10px 0 60px #FF5733; /* Cambiar a un tono de naranja */
+}
+
+
+.center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+    </style>
+</head>
+<body class="body">
+    <h1 class="futuristic-title">Animación de Irradiación Solar a lo largo del Día</h1>
+    <div class="orb"></div>
+    <div class="futuristic-text" style="margin-top: 60px;">
+        <p>La mejor hora para conectar el panel solar en la mañana es a las: {{ mejor_hora_min }}</p>
+        <p>La mejor hora para conectar el panel solar en la tarde es a las: {{ mejor_hora_max }}</p>
+    </div>
+    
+    <br>
+    <button style="font-family: Century Gothic, sans-serif;" type="button" class="btn futuristic-btn" onclick="toggleGraph()">Mostrar/ocultar Gráfica</button>
+    <div ><img id="solarAnimationContainer" src="{{ animation_filename }}" alt="Irradiación Solar"></div>
+
+
+    <script>
+        function toggleGraph() {
+            var img = document.getElementById('solarAnimationContainer');
+            img.style.display = (img.style.display === 'none') ? 'block' : 'none';
+        }
+    </script>
+    
+  
+    <footer style="margin-top: 30px; background-color: #000000;" class="page-footer font-small pt-4">
+        <div class="container-fluid text-center text-md-left" style=" background-image: linear-gradient(rgb(0, 0, 0),rgb(151, 93, 0)); font-family: Century Gothic;">
+            <div class="row">
+                    <h5 class="text-uppercase">¿Por qué es importante la hora de conexión?</h5>
+                    <p>Conectar tu panel solar en el momento adecuado puede maximizar la eficiencia energética y optimizar el rendimiento de tu sistema fotovoltaico. Aprovecha al máximo la luz solar siguiendo estas recomendaciones.</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright text-center py-3" style="background-color: #000000; font-family: Century Gothic; color: whitesmoke; text-shadow: 0 0 10px #FFFFFF;">
+            © 2024 Todos los derechos reservados | Desarrollado por Edmundo Contreras
+        </div>
+        
+    </footer>
+</body>
+
+</html>
