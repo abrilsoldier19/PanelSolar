@@ -29,7 +29,7 @@ if current_datetime.hour < 12:
 end_time = start_time + timedelta(days=1)
 
 # Generar el índice de tiempo desde las 15:00 horas del día actual hasta las 15:00 horas del siguiente día, de 3 en 3 horas
-times = pd.date_range(start_time, end_time, freq='3H', tz=local_tz)
+times = pd.date_range(start_time, end_time, freq='3h', tz=local_tz)
 
 # Calcular la posición solar
 solpos = solarposition.get_solarposition(times, lat, lon)
@@ -110,7 +110,7 @@ plt.xticks(rotation=45)
 num_hours = int((end_time - start_time).total_seconds() / 3600)
 
 # Generar el índice de tiempo con más detalle, por ejemplo, cada 30 minutos en lugar de cada 3 horas
-times = pd.date_range(start_time, end_time, freq='30T', tz=local_tz)
+times = pd.date_range(start_time, end_time, freq='30min', tz=local_tz)
 
 # Guardar la animación como un archivo GIF
 animation_filename = 'static/panelsolar.gif'
