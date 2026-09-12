@@ -35,7 +35,7 @@ times = pd.date_range(start_time, end_time, freq='3h', tz=local_tz)
 solpos = solarposition.get_solarposition(times, lat, lon)
 
 # Crear la figura y el eje
-fig, ax = plt.subplots(figsize=(7, 4.5))
+fig, ax = plt.subplots(figsize=(6, 5))
 
 # Inicialización del gráfico
 truetracking_angles = tracking.singleaxis(
