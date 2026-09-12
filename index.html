@@ -37,16 +37,19 @@
         }
 
         #solarAnimationContainer {
-            width: 80%; /* Adjust the width as needed */
-            margin: 0 auto; /* Center the container */
-            overflow: hidden; /* Hide the overflowing content */
-            box-shadow: 0 0 18px rgb(238, 211, 112);
-            display: flex;
-            margin-top: 30px;
-            flex-direction: column;
-            align-items: center; /* Centrar verticalmente */
-            justify-content: center;
-        }
+    width: 100%;             /* Deja que ocupe el ancho de su contenedor */
+    max-width: 500px;        /* ¡ESTO LO ACHICA! Ajusta este número (ej. 450px) si la quieres aún más pequeña */
+    height: auto;            /* Mantiene la proporción correcta para que no se deforme */
+    margin: 0 auto;          /* La mantiene centrada en la pantalla */
+    overflow: hidden; 
+    box-shadow: 0 0 18px rgb(238, 211, 112);
+    display: flex;
+    margin-top: 30px;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+}
+
 
         #solarAnimation {
             width: 100%; /* Ensure the animation fills the container */
