@@ -126,4 +126,4 @@ def index():
     return render_template('index.html', animation_filename=animation_filename, mejor_hora_max=mejor_hora_max, mejor_hora_min=mejor_hora_min)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    app.run(host='0.0.0.0', port=5001)
