@@ -31,8 +31,8 @@ def index():
     times = pd.date_range(start_time, end_time, freq='15min', tz=local_tz)
     
     # Calcular la posición solar
-    latitud = 40.0
-    longitud = -80.0
+    latitud = 25.65
+    longitud = -100.32
     solpos = solarposition.get_solarposition(times, latitud, longitud)
 
     # Inicialización del gráfico
