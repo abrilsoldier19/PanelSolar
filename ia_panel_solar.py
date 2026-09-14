@@ -9,8 +9,11 @@ from pvlib import solarposition, tracking
 from datetime import datetime, timedelta
 import pytz
 import matplotlib.dates as mdates
+import os
 
 app = Flask(__name__)
+
+@app.route("/")
 
 def index():
     # Obtener la zona horaria local automáticamente
@@ -46,7 +49,7 @@ def index():
 
     # Graficar la curva de seguimiento
     ax.plot(position.index, position.values, label='Curva de Seguimiento', color='black')
-    ax.set_ylim(truetracking_position.min() - 5, truetracking_position.max() + 5)
+    ax.set_ylim(position.min() - 5, position.max() + 5)
 
         # Encontrar y marcar los puntos Mínimo y Máximo
     best_min = position.idxmin()
