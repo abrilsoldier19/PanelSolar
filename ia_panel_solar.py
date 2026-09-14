@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-#from matplotlib.animation import FuncAnimation
+from matplotlib.animation import FuncAnimation
 #from matplotlib.dates import DateFormatter
 from pvlib import solarposition, tracking
 from datetime import datetime, timedelta
