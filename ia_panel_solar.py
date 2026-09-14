@@ -28,7 +28,7 @@ def index():
     end_time = current_datetime.replace(hour=23, minute=45, second=0, microsecond=0)
 
     # Generar el índice de tiempo
-    times = pd.date_range(start_time, end_time, freq='30min', tz=local_tz)
+    times = pd.date_range(start_time, end_time, freq='h', tz=local_tz)
     
     # Calcular la posición solar
     latitud = 25.65
@@ -64,7 +64,7 @@ def index():
     
     # Mostrar solo algunas etiquetas de hora para que no se amontonen
     plt.xticks(rotation=45, fontsize=8)
-    x_labels = [dt.strftime('%I:%M %p') if i % 4 == 0 else '' for i, dt in enumerate(position.index)]
+    x_labels = [dt.strftime('%I:%M %p') if i % 3 == 0 else '' for i, dt in enumerate(position.index)]
     ax.set_xticks(position.index)
     ax.set_xticklabels(x_labels)
     ax.legend(fontsize=8)
@@ -72,7 +72,7 @@ def index():
     # Función de actualización para la animación cuadro por cuadro
     def update(frame):
         # Va pintando la curva conforme avanza el tiempo
-        curve.set_data(position.index[:frame], position.values[:frame])
+        curve.set_data(position.index[:frame+1], position.values[:frame+1])
         
         # Muestra la fecha y la hora correspondiente a ese cuadro en el título
         timestamp_actual = position.index[frame].strftime('%I:%M %p')
