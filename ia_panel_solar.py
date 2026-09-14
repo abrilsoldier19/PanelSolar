@@ -28,7 +28,9 @@ def index():
     times = pd.date_range(start_time, end_time, freq='15min', tz=local_tz)
     
     # Calcular la posición solar
-    solpos = solarposition.get_solarposition(times, lat=40, lon=-80)
+    latitud = 40.0
+    longitud = -80.0
+    solpos = solarposition.get_solarposition(times, latitud, longitud)
 
     # Inicialización del gráfico
     truetracking = tracking.singleaxis(
