@@ -28,7 +28,7 @@ def index():
     end_time = current_datetime.replace(hour=23, minute=45, second=0, microsecond=0)
 
     # Generar el índice de tiempo
-    times = pd.date_range(start_time, end_time, freq='15min', tz=local_tz)
+    times = pd.date_range(start_time, end_time, freq='30min', tz=local_tz)
     
     # Calcular la posición solar
     latitud = 25.65
@@ -48,31 +48,46 @@ def index():
     fig, ax = plt.subplots(figsize=(5.5, 4))
 
     # Graficar la curva de seguimiento
-    ax.plot(position.index, position.values, label='Curva de Seguimiento', color='black')
+    curve, = ax.plot(position.index, position.values, label='Curva de Seguimiento', color='black')
+    ax.set_xlim(start_time, end_time)
     ax.set_ylim(position.min() - 5, position.max() + 5)
 
-        # Encontrar y marcar los puntos Mínimo y Máximo
+     # Encontrar y marcar los puntos Mínimo y Máximo
     best_min = position.idxmin()
     best_max = position.idxmax()
     ax.plot(best_min, position[best_min], color='#08968F', marker='o', label='Mejor Hora Mañana')
     ax.plot(best_max, position[best_max], color='#0652EA', marker='o', label='Mejor Hora Tarde')
+    
 
     # Estilos y Protección del Texto de Abajo
     plt.title(f'Irradiación Solar ({current_datetime.strftime("%Y-%m-%d")})', fontsize=10)
-    plt.xticks(rotation=45, fontsize=8)
     
     # Mostrar solo algunas etiquetas de hora para que no se amontonen
-    x_labels = [dt.strftime('%I:%M %p') if i % 8 == 0 else '' for i, dt in enumerate(position.index)]
+    plt.xticks(rotation=45, fontsize=8)
+    x_labels = [dt.strftime('%I:%M %p') if i % 4 == 0 else '' for i, dt in enumerate(position.index)]
     ax.set_xticks(position.index)
     ax.set_xticklabels(x_labels)
     ax.legend(fontsize=8)
+
+    # Función de actualización para la animación cuadro por cuadro
+    def update(frame):
+        # Va pintando la curva conforme avanza el tiempo
+        curve.set_data(position.index[:frame], position.values[:frame])
+        
+        # Muestra la fecha y la hora correspondiente a ese cuadro en el título
+        timestamp_actual = position.index[frame].strftime('%I:%M %p')
+        ax.set_title(f'Irradiación Solar ({current_datetime.strftime("%Y-%m-%d")} {timestamp_actual})', fontsize=10)
+        return curve,
+
+    # Crear la animación secuencial
+    ani = FuncAnimation(fig, update, frames=len(times), blit=False)
     
     fig.tight_layout()
 
     # Guardar la Imagen como PNG (Más ligero que un GIF)
     os.makedirs('static', exist_ok=True)
     graph_filename = 'static/panelsolar.png'
-    plt.savefig(graph_filename)
+    ani.save(graph_filename, writer="pillow", fps=5)
     plt.close(fig) # Cierra la imagen para liberar memoria del servidor
 
     # Enviar los Datos Listos al HTML
